@@ -1,0 +1,691 @@
+**[1]** Çalışanlar tablosundan tüm kayırları döndüren SQL sorgusunu yazınız.
+---
+SELECT 
+*
+FROM
+HR.EMPLOYEES;
+---
+*[2]** Çalışanlar tablosunda kişinin soyadını ve maaşının %20 zamlı halini aşağıdaki gibi listeleyen SQL sorgusunu yazınız. 
+---
+SELECT 
+LAST_NAME,
+SALARY * 1.20 AS SALARY_INCREASE
+FROM
+HR.EMPLOYEES;
+---
+LAST_NAME     SALARY_INCREASE 
+------------- -----------------
+ King          28800           
+ Yang          20400           
+ Garcia        20400           
+ James         10800           
+ Miller        7200 
+ 
+ 
+**[3]** Bölümler tablosundaki tüm kayıtları bölüm kodu ve adı olacak şekilde aşağıdaki gibi listeleyen SQL sorgusunu yazınız.  
+---
+SELECT 
+DEPARTMENT_ID AS DEPTNUM,
+DEPARTMENT_NAME AS DEPTNAME
+FROM
+HR.departments;
+---
+DEPTNUM   DEPTNAME             
+--------- ----------------------
+ 10        Administration       
+ 20        Marketing            
+ 30        Purchasing           
+ 40        Human Resources      
+ 50        Shipping   
+ 
+**[4]** Bölümler tablosundaki tüm kayıtları bölüm kodu ve adı olacak şekilde aşağıdaki gibi listeleyen SQL sorgusunu yazınız.  
+---
+SELECT 
+DEPARTMENT_ID AS "Department Id",
+DEPARTMENT_NAME AS "DEPARTMENT NAME"
+FROM
+HR.DEPARTMENTS;
+---
+Department Id   DEPARTMENT NAME      
+--------------- ----------------------
+ 10              Administration       
+ 20              Marketing            
+ 30              Purchasing           
+ 40              Human Resources  
+ 
+**[5]** Çalışanlar tablosundaki tüm kayıtları ad ve soyadını aralarında birer boşlukla birleştirip aşağıdaki gibi tek bir alanda listeleyen SQL sorgusunu yazınız.  
+---
+SELECT 
+   FIRST_NAME || ' ' || LAST_NAME AS "Full name"
+FROM
+HR.employees;
+---
+Full name         
+-------------------
+ Ellen Abel        
+ Sundar Ande       
+ Mozhe Atkinson    
+ Shelli Baida      
+ Amit Banda        
+ Elizabeth Bates   
+ Sarah Bell    
+ 
+**[6]** Bölümler tablosunda bölüm adı ve yönetici id alanlarını tek alanda birleştiren, quote q'[]' operatörleri kullanılan ve aşağıdaki çıktıyı veren SQL sorgusunu yazınız.  
+---
+SELECT 
+DEPARTMENT_NAME || '''nın yöneticisi: ' || MANAGER_ID AS "Department and Manager"
+FROM
+HR.DEPARTMENTS;
+---
+ Department and Manager                
+---------------------------------------
+ Administration'nın yöneticisi: 200    
+ Marketing'nın yöneticisi: 201         
+ Purchasing'nın yöneticisi: 114        
+ Human Resources'nın yöneticisi: 203   
+ Shipping'nın yöneticisi: 121          
+ IT'nın yöneticisi: 103                
+ Public Relations'nın yöneticisi: 204  
+ 
+**[7]** Çalışanlar tablosunda benzersiz tüm isimleri listeleyen ve aşağıdaki gibi çıktı veren SQL sorgusunu yazınız.  
+---
+SELECT 
+DISTINCT FIRST_NAME AS "First NAME"
+FROM
+HR.employees;
+---
+First NAME  
+-------------
+ Ellen       
+ Sundar      
+ Mozhe       
+ Shelli      
+ Amit        
+ Elizabeth  
+ 
+**[8]** Çalışanlar tablosunda kişinin adını ve bir yıllık maaşını aşağıdaki gibi listeleyen SQL sorgusunu yazınız. 
+---
+SELECT 
+FIRST_NAME AS "FIRST_NAME",
+SALARY * 12 AS "Yearly Salary"
+FROM
+HR.employees;
+---
+FIRST_NAME    Yearly Salary 
+------------- ---------------
+ Steven        288000        
+ Neena         204000        
+ Lex           204000        
+ Alexander     108000        
+ Bruce         72000         
+ David         57600   
+ 
+*[9]** Yerleşkeler(Locations) tablosunda ülke'nin iki haneli kodu ve şehri tek alanda birleştiren aşağıdaki gibi çıktı veren SQL sorgusunu yazınız.  
+---
+SELECT 
+CITY || '/' || COUNTRY_ID AS "CITY_AND_COUNTRY"
+FROM
+HR.LOCATIONS;
+---
+CITY_AND_COUNTRY       
+------------------------
+ Roma/IT                
+ Venice/IT              
+ Tokyo/JP               
+ Hiroshima/JP           
+ Southlake/US           
+ South San Francisco/US 
+ South Brunswick/US   
+ 
+**[10]** Çalışanlar tablosunda benzersiz maaşları listeleyen ve aşağıdaki çıktıyı veren SQL sorgusunu yazınız. 
+---
+SELECT 
+   DISTINCT SALARY AS "UNIQUE salary"
+FROM
+HR.employees;
+---
+UNIQUE salary 
+---------------
+ 24000         
+ 17000         
+ 9000          
+ 6000          
+ 4800          
+ 4200 
+ 
+**[1]** 50 numaralı bölümde çalışan kişileri soyadına göre azalan sıralayan SQL sorgusunu yazınız.  
+ 
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    DEPARTMENT_ID
+FROM 
+    HR.employees
+WHERE 
+    DEPARTMENT_ID = 50
+ORDER BY 
+    LAST_NAME DESC;
+ 
+**[2]** 80 numaralı bölümde çalışmayan ve komisyon almayan kişileri adına göre artan sıralayan SQL sorgusunu yazınız.  
+ 
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    COMMISSION_PCT
+FROM 
+    HR.employees
+WHERE 
+    DEPARTMENT_ID <> 80
+    AND COMMISSION_PCT IS NULL
+ORDER BY 
+    FIRST_NAME ASC;
+ 
+**[3]** İş tanımı IT_PROG olan, yöneticisi 103 olan kişileri adına göre azalan ve soyadına göre azalan sıralayan SQL sorgusunu yazınız.  
+ 
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    JOB_ID,
+    MANAGER_ID
+FROM 
+    HR.employees
+WHERE 
+    JOB_ID = 'IT_PROG'
+    AND MANAGER_ID = 103
+ORDER BY 
+    FIRST_NAME DESC, 
+    LAST_NAME DESC;
+ 
+**[4]** Yöneticisi olan kişileri listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    MANAGER_ID
+FROM 
+    HR.employees
+WHERE 
+    MANAGER_ID IS NOT NULL;
+ 
+**[5]** Yönetici kodu 121 olan ve komisyon almayan kişileri maaşına göre azalan sıralayan ve ilk 4 kaydı getiren SQL sorgusunu yazınız.  
+(İpucu: FETCH ifadelerini kullanınız)
+ 
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    MANAGER_ID,
+    SALARY
+FROM 
+    HR.employees
+WHERE 
+    MANAGER_ID = 121
+    AND COMMISSION_PCT IS NULL
+ORDER BY 
+    SALARY DESC 
+FETCH FIRST 4 ROWS ONLY;
+ 
+**[6]** Maaşı 3300$ ve 7500$ arasında olmayan, komisyon almayan kişileri adına göre artan ve soyadına göre azalan sıralayan SQL sorgusunu yazınız.  
+ 
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    SALARY,
+    COMMISSION_PCT
+FROM 
+    HR.employees
+WHERE 
+    (SALARY < 3300 OR SALARY > 7500)
+    AND COMMISSION_PCT IS NULL
+ORDER BY 
+    FIRST_NAME ASC, 
+    LAST_NAME DESC;
+ 
+**[7]** 80 veya 90 kodlu bölümlerde çalışan, maaşı 7500$ ve altı olan kişileri listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    SALARY,
+    DEPARTMENT_ID
+FROM 
+    HR.employees
+WHERE 
+    DEPARTMENT_ID IN (80, 90)
+    AND SALARY <= 7500;
+ 
+**[8]** 60 veya 100 numaralı bölümlerde çalışmayan ve soyadının son harfi g olan personelleri listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    SALARY,
+    DEPARTMENT_ID
+FROM 
+    HR.employees
+WHERE 
+    DEPARTMENT_ID NOT IN (60, 100)
+    AND LAST_NAME LIKE '%g';
+ 
+**[9]** Çalışanlar tablosunda isminde a harfi olan ve soyadının ikinci harfi l olmayan kişileri listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME
+FROM 
+    HR.employees
+WHERE 
+    FIRST_NAME LIKE '%a%' 
+    AND LAST_NAME NOT LIKE '_l%';
+ 
+**[10]** Soyadı "ing" kelimesi ile bitmeyen ve komisyon alan kişileri listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    SALARY,
+    COMMISSION_PCT
+FROM 
+    HR.employees
+WHERE 
+    LAST_NAME NOT LIKE '%ing' 
+    AND COMMISSION_PCT IS NOT NULL;
+ 
+**[11]** İş tanımında "MAN" kelimesi geçen, komisyon alan ve maaşları 2800 ve 4800 arasında olmayan kişileri listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    SALARY,
+    JOB_ID,
+    COMMISSION_PCT
+FROM 
+    HR.employees
+WHERE 
+    JOB_ID LIKE '%MAN%' 
+    AND COMMISSION_PCT IS NOT NULL
+    AND (SALARY < 2800 OR SALARY > 4800);
+ 
+**[12]** Maaşı 2700$ yada 4800$ olan adının sonunda "son" kelimesi bulunan kişileri listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    SALARY
+FROM 
+    HR.employees
+WHERE 
+    SALARY IN (2700, 4800)
+    AND LAST_NAME LIKE '%son';
+ 
+**[13]** Personel tablosunda "it_prog" işinde çalışmayan ve komisyon alan kişileri büyük küçük harf duyarlılığı olmadan listeleyen SQL sorgusunu yazınız.(Not: WHERE kısmında tek satırlık fonksiyon kullanınız)
+ 
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME
+FROM 
+    HR.employees
+WHERE 
+    JOB_ID <> UPPER('it_prog')
+    AND COMMISSION_PCT IS NOT NULL;
+ 
+**[14]** 21 Haziran 2017 tarihinden önce işe başlayan, maaşı 6400$ ve üstünde olan kişileri listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    SALARY,
+    HIRE_DATE
+FROM 
+    HR.employees
+WHERE 
+    HIRE_DATE < TO_DATE('21-JUN-2017', 'DD-MON-YYYY')
+    AND SALARY >= 6400;
+ 
+**[15]** Mayıs ayında işe başlamayan, maaşı 6000$ ve 8000$ arasında olan kişileri listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    SALARY,
+    HIRE_DATE
+FROM 
+    HR.employees
+WHERE 
+    TO_CHAR(HIRE_DATE, 'MON') <> 'MAY'
+    AND SALARY BETWEEN 6000 AND 8000;
+ 
+**[16]** İşinin 4. karakter ve sonrası CLERK olmayan ve yönetici kodu 108 olmayan personelleri listeleyen SQL sorgusunu yazınız.  
+ (Not: WHERE kısmında tek satırlık fonksiyon kullanınız)
+ 
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    MANAGER_ID,
+    JOB_ID
+FROM 
+    HR.employees
+WHERE 
+    SUBSTR(JOB_ID, 4) <> 'CLERK'
+    AND MANAGER_ID <> 108;
+ 
+**[17]** İşinin içinde REP kelimesi barındıran, 7000$ ve altında maaş alan kişileri maaşına göre azalan şekilde listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    JOB_ID,
+    SALARY
+FROM 
+    HR.employees
+WHERE 
+    JOB_ID LIKE '%REP%'
+    AND SALARY <= 7000
+ORDER BY 
+    SALARY DESC;
+ 
+**[18]** Her ayın 13. günü işe başlamayan, iş tanımının içinde "MAN" kelimesi geçmeyen personelleri adına göre artan sıralayan SQL sorgusunu yazınız.  
+ 
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    JOB_ID,
+    SALARY
+FROM 
+    HR.employees
+WHERE 
+    TO_CHAR(HIRE_DATE, 'DD') <> '13'
+    AND JOB_ID NOT LIKE '%MAN%'
+ORDER BY 
+    FIRST_NAME ASC;
+ 
+**[19]** Yöneticisi olmayan ve bölüm kodu 2 ile başlayan kayıtları bölüm adına göre artan sıralayan SQL sorgusunu yazınız.  
+ 
+SELECT 
+    DEPARTMENT_ID,
+    DEPARTMENT_NAME
+FROM 
+    HR.DEPARTMENTS
+WHERE 
+    MANAGER_ID IS NULL
+    AND DEPARTMENT_ID LIKE '2%'
+ORDER BY 
+    DEPARTMENT_NAME ASC;
+ 
+**[20]** Yöneticisi olan bölümlerden, bölüm adının son karakteri g olmayan ve ilk karakteri H olmayan kayıtları listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT 
+    DEPARTMENT_ID,
+    DEPARTMENT_NAME
+FROM 
+    HR.DEPARTMENTS
+WHERE 
+    MANAGER_ID IS NOT NULL
+    AND DEPARTMENT_NAME NOT LIKE '%g'
+    AND DEPARTMENT_NAME NOT LIKE 'H%';
+ 
+*[1]** Mayıs 2013'de işe başlayan kişilerin listesini soyadına göre azalan veren SQL sorgusunu yazınız.  
+  
+SELECT 
+    FIRST_NAME,
+    LAST_NAME,
+    TO_CHAR(HIRE_DATE, 'DD/MM/YYYY') AS HIRE_DATE
+FROM
+    HR.employees
+WHERE
+    TO_CHAR(HIRE_DATE, 'MM-YYYY') = '05-2013'
+ORDER BY 
+    LAST_NAME DESC;
+ 
+**[2]** 2016 yılı dışında ayın 7. günü işe başlayan kişileri listeleyen promosyon alıyorsa COMMISSION alanını 1, almıyorsa 0 yapan SQL sorgusunu yazınız. (İpucu:NVL2 fonksiyonunu kullanabilirsiniz) 
+ 
+SELECT 
+    FIRST_NAME,
+    LAST_NAME,
+    TO_CHAR(HIRE_DATE, 'DD/MM/YYYY') AS HIRE_DATE,
+    NVL2(COMMISSION_PCT, 1, 0) AS COMMISSION
+FROM
+    HR.employees
+WHERE
+    TO_CHAR(HIRE_DATE, 'DD') = '07' 
+    AND TO_CHAR(HIRE_DATE, 'YYYY') != '2016';
+ 
+**[3]** Komisyon almayan kişileri COMMISSION alanında 0 ile gösteren, kişileri COMMISSION alanına göre artan ve maaşına göre azalan şekilde listeleyen SQL sorgusunu yazınız.  (İpucu:NVL fonksiyonunu kullanabilirsiniz)  
+ 
+SELECT
+    LAST_NAME,
+    SALARY,
+    NVL(COMMISSION_PCT, 0) AS COMMISSION
+FROM
+    EMPLOYEES;
+ 
+**[4]** MANAGER alanında yöneticisi var ise Yes yok ise No yazan ve 60 yada 90 numaralı bölümlerde çalışan kişileri listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    DEPARTMENT_ID,
+    NVL2(MANAGER_ID, 'Yes', 'No') AS MANAGER
+FROM
+    HR.EMPLOYEES
+WHERE 
+    DEPARTMENT_ID IN (60, 90);
+ 
+**[5]** Komisyon almayan kişilerin maaşlarının ondalık işaretinden önce 5 hane sonra ise 2 hane (ondalık değer yoksa 0 ile doldurarak) olacak şekilde listeyen SQL sorgusunu yazınız.  
+ 
+SELECT
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    SALARY,
+    TO_CHAR(SALARY, 'FM99990.00') AS SALARY
+FROM
+    HR.EMPLOYEES
+WHERE
+    COMMISSION_PCT IS NULL;
+ 
+**[6]** Komisyon oranı 0-0.25 arasında ise maaşa %20 ekleyen, 0.25-0.5 arasında ise %40 ekleyen, 0.5 ve üzeri ise %60 ekleyen ve komisyon oranına göre artan sıralayan SQL sorgusunu yazınız.  
+(İpucu: ORDER BY cümlesinde tek satırlık ve dönüşüm fonksiyonları kullanılabilir. Lütfen TOTAL alanını kullanınız)
+ 
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    DEPARTMENT_ID,
+    NVL(COMMISSION_PCT, 0) AS COMMISSION_PCT,
+    SALARY + CASE 
+                WHEN NVL(COMMISSION_PCT, 0) BETWEEN 0 AND 0.25 THEN SALARY * 0.2
+                WHEN NVL(COMMISSION_PCT, 0) BETWEEN 0.25 AND 0.5 THEN SALARY * 0.4
+                WHEN NVL(COMMISSION_PCT, 0) >= 0.5 THEN SALARY * 0.6
+             END AS TOTAL
+FROM
+    HR.employees
+ORDER BY 
+    NVL(COMMISSION_PCT, 0) ASC;
+ 
+**[7]** Yöneticisi 122 yada 123 olmayan, sıfır komisyon alan kişileri maaşlarının solunda $ dolar sembolü ve 6 haneli tam sayı olarak gösteren, maaşa göre azalan sıralayan SQL sorgusunu yazınız. (İpucu: Hiç komisyon almayanlar sıfırlanacak)
+ 
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    TO_CHAR(SALARY, '$999,999') AS SALARY
+FROM 
+    HR.employees
+WHERE 
+    MANAGER_ID NOT IN (122, 123)
+    AND NVL(COMMISSION_PCT, 0) = 0
+ORDER BY 
+    SALARY DESC;
+ 
+**[8]** Çalışan ID'si 3'e bölünebilen ve isminde "et" kelimesi barındıran kişileri listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    DEPARTMENT_ID
+FROM
+    HR.employees
+WHERE
+    MOD(EMPLOYEE_ID, 3) = 0
+    AND FIRST_NAME LIKE '%et%';
+ 
+**[9]**Sistem tarih saatinden 3 ay 10 gün sonrasını DD/MM/YYYY formatında karaktere dönüştüren SQL sorgusunu yazınız.  
+ 
+SELECT
+   TO_CHAR(ADD_MONTHS(SYSDATE, 3) + 10, 'DD/MM/YYYY') AS TIME
+FROM
+   DUAL;
+ 
+**[10]** 24/05/2024 14:36 tarih saatinden 5 gün 6 saat sonrasını DD/MM/YYYY HH24 formatında yazdıran  SQL sorgusunu yazınız.  
+ 
+SELECT
+   TO_CHAR(TO_DATE('24/05/2024 14:36', 'DD/MM/YYYY HH24:MI') + 5 + (6 / 24), 'DD/MM/YYYY HH24') AS TIME
+FROM
+   DUAL;
+ 
+**[11]** Çalışanlar tablosunda işe başlama tarihi o ayın son gününden 14 gün önce olan personelleri listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT
+   EMPLOYEE_ID,
+   FIRST_NAME,
+   LAST_NAME,
+   HIRE_DATE
+FROM
+   HR.employees
+WHERE
+   HIRE_DATE = LAST_DAY(HIRE_DATE) - 14;
+ 
+**[12]** 17 Haziran 2013 tarihinden 3 ay sonra işe başlayan kişileri listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT
+   EMPLOYEE_ID,
+   FIRST_NAME,
+   LAST_NAME,
+   HIRE_DATE
+FROM
+   HR.employees
+WHERE
+   HIRE_DATE = ADD_MONTHS(TO_DATE('17-JUN-2013', 'DD-MON-YYYY'), 3);
+ 
+**[13]** İşe başladığı yılın ilk gününden 23 gün sonra işe başlayan kişileri listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT
+   EMPLOYEE_ID,
+   FIRST_NAME,
+   LAST_NAME,
+   HIRE_DATE
+FROM
+   HR.employees
+WHERE
+   HIRE_DATE = TRUNC(HIRE_DATE, 'YYYY') + 23;
+ 
+**[14]** İşe başladığı yıldan sonraki yılın ilk tarihinden 25 gün önce işe başlayan kişileri listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT
+   EMPLOYEE_ID,
+   FIRST_NAME,
+   LAST_NAME,
+   HIRE_DATE
+FROM
+   HR.employees
+WHERE
+   HIRE_DATE = ADD_MONTHS(TRUNC(HIRE_DATE, 'YYYY'), 12) - 25;
+ 
+**[15]** Çalıştığı ayın ilk gününde işe başlayan personelleri listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT
+   EMPLOYEE_ID,
+   FIRST_NAME,
+   LAST_NAME,
+   HIRE_DATE
+FROM
+   HR.employees
+WHERE
+   HIRE_DATE = TRUNC(HIRE_DATE, 'MM');
+ 
+**[16]** İşe başladığı gün bir sonraki ayın ilk tarihinden 14 gün önce olan kişileri listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT
+   EMPLOYEE_ID,
+   FIRST_NAME,
+   LAST_NAME,
+   HIRE_DATE
+FROM
+   HR.employees
+WHERE
+   HIRE_DATE = TRUNC(ADD_MONTHS(HIRE_DATE, 1), 'MM') - 14;
+ 
+**[17]** İşe başladığı gün o ayın ilk gününden 8 gün sonrası olan kişileri listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT
+   EMPLOYEE_ID,
+   FIRST_NAME,
+   LAST_NAME,
+   HIRE_DATE
+FROM
+   HR.employees
+WHERE
+   HIRE_DATE = TRUNC(HIRE_DATE, 'MM') + 8;
+ 
+**[18]** 2014 yılında işe başlayan kişilerin işe başlama tarihlerini işe başladıkları ayın son tarihi ile birlikte listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT
+   EMPLOYEE_ID,
+   FIRST_NAME,
+   LAST_NAME,
+   HIRE_DATE,
+   LAST_DAY(HIRE_DATE) AS BEGIN_OF_MONTH
+FROM
+   HR.employees
+WHERE
+   EXTRACT(YEAR FROM HIRE_DATE) = 2014;
+ 
+**[19]** 60 yada 90 numaralı bölümlerde çalışmayan, sıfır komisyon alan kişileri işe başladıkları gün ile birlikte işe başladıkları ay sonunu listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT
+   EMPLOYEE_ID,
+   FIRST_NAME,
+   LAST_NAME,
+   COMMISSION_PCT,
+   HIRE_DATE,
+   LAST_DAY(HIRE_DATE) AS END_OF_MONTH
+FROM
+   HR.employees
+WHERE
+   DEPARTMENT_ID NOT IN (60, 90)
+   AND NVL(COMMISSION_PCT, 0) = 0;
+ 
+**[20]** 0.25 ve üzeri komisyon alan isminin içinde s harfi geçen kişileri işe başladıkları tarih ve kaç hafta çalıştıklarının en yakın tam sayıya yuvarlanmış hallerini listeleyen SQL sorgusunu yazınız.  
+ 
+SELECT
+   EMPLOYEE_ID,
+   FIRST_NAME,
+   LAST_NAME,
+   COMMISSION_PCT,
+   HIRE_DATE,
+   ROUND((SYSDATE - HIRE_DATE) / 7) AS NUM_OF_WEEKS
+   HR.employees
+WHERE
+   COMMISSION_PCT >= 0.25
+   AND LOWER(FIRST_NAME) LIKE '%s%';
+
