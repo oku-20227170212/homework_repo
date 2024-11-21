@@ -1,0 +1,13 @@
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    JOB_ID,
+    SALARY
+FROM 
+    HR.employees
+WHERE 
+    TO_CHAR(HIRE_DATE, 'DD') <> '13'
+    AND JOB_ID NOT LIKE '%MAN%'
+ORDER BY 
+    FIRST_NAME ASC;

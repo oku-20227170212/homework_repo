@@ -1,0 +1,13 @@
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    JOB_ID,
+    SALARY
+FROM 
+    HR.employees
+WHERE 
+    JOB_ID LIKE '%REP%'
+    AND SALARY <= 7000
+ORDER BY 
+    SALARY DESC;

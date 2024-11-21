@@ -1,0 +1,9 @@
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    MANAGER_ID
+FROM 
+    HR.employees
+WHERE 
+    MANAGER_ID IS NOT NULL;

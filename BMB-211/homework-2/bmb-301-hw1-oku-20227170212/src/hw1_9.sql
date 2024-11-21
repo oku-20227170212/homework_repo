@@ -1,0 +1,9 @@
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME
+FROM 
+    HR.employees
+WHERE 
+    FIRST_NAME LIKE '%a%' 
+    AND LAST_NAME NOT LIKE '_l%';

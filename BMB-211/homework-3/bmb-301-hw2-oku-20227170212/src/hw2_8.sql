@@ -1,0 +1,10 @@
+SELECT
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    DEPARTMENT_ID
+FROM
+    HR.employees
+WHERE
+    MOD(EMPLOYEE_ID, 3) = 0
+    AND FIRST_NAME LIKE '%et%';

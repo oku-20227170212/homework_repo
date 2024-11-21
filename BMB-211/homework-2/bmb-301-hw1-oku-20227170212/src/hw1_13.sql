@@ -1,0 +1,9 @@
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME
+FROM 
+    HR.employees
+WHERE 
+    JOB_ID <> UPPER('it_prog')
+    AND COMMISSION_PCT IS NOT NULL;

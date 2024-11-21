@@ -1,0 +1,4 @@
+SELECT 
+   DISTINCT SALARY AS "UNIQUE salary"
+FROM
+	HR.employees;

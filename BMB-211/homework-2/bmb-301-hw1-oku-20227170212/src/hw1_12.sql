@@ -1,0 +1,10 @@
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    SALARY
+FROM 
+    HR.employees
+WHERE 
+    SALARY IN (2700, 4800)
+    AND LAST_NAME LIKE '%son';

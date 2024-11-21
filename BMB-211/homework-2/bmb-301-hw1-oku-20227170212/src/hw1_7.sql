@@ -1,0 +1,11 @@
+SELECT 
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    SALARY,
+    DEPARTMENT_ID
+FROM 
+    HR.employees
+WHERE 
+    DEPARTMENT_ID IN (80, 90)
+    AND SALARY <= 7500;
