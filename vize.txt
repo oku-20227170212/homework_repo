@@ -474,7 +474,9 @@ SELECT
     SALARY,
     NVL(COMMISSION_PCT, 0) AS COMMISSION
 FROM
-    EMPLOYEES;
+    HR.EMPLOYEES
+ORDER BY 
+    NVL(COMMISSION_PCT, 0), SALARY DESC;
  
 **[4]** MANAGER alanında yöneticisi var ise Yes yok ise No yazan ve 60 yada 90 numaralı bölümlerde çalışan kişileri listeleyen SQL sorgusunu yazınız.  
  
